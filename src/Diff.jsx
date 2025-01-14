@@ -66,7 +66,7 @@ function PipelineRunDiff() {
 
   return (
     <div style={{ fontFamily: 'Arial, sans-serif', color: '#333' }}>
-      <div style={{ flex: '0 1 auto', padding: '10px', textAlign: 'left', backgroundColor: '#e0edf9', border: '1px solid #aad1f7', borderRadius: '10px', margin: '10px' }}>
+      <div style={{ flex: '0 1 auto', padding: '15px', textAlign: 'left', backgroundColor: '#e0edf9', border: '1px solid #aad1f7', borderRadius: '10px', margin: '10px 30px' }}>
         <h4 style={{ margin: '0', fontSize: '1.5em' }}>Comparing Pipeline Runs: '{id1}' and '{id2}'</h4>
       </div>
         
@@ -76,12 +76,10 @@ function PipelineRunDiff() {
         const sanitizedHtml = DOMPurify.sanitize(diffHtml);
 
         return (
-          <div key={type} style={{ marginBottom: '20px' }}>
-            <div style={{ marginTop: '20px', margin: '10px' }}>
+          <div key={type} style={{ margin: '10px 30px' }}>
               <div style={{ border: '1px solid #ddd', borderRadius: '5px', overflow: 'auto', maxHeight: '80vh', padding: '10px', backgroundColor: '#f9f9f9' }}>
                 <div dangerouslySetInnerHTML={{ __html: sanitizedHtml }} />
               </div>
-            </div>
           </div>
         );
 
