@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { parse, html } from 'diff2html';
 import 'diff2html/bundles/css/diff2html.min.css';
 import DOMPurify from 'dompurify';
+import { createTwoFilesPatch } from 'diff';
 
 function PipelineRunDiff() {
   const { id1, id2 } = useParams();
@@ -30,16 +31,9 @@ function PipelineRunDiff() {
     return <div>Loading...</div>;
   }
 
-  const diffText = `--- metadata (${metadata1.id})
-+++ metadata (${metadata2.id})
-@@ -1,3 +1,3 @@
--${JSON.stringify(metadata1, null, 2)}
-+${JSON.stringify(metadata2, null, 2)}`;
-
-  const diffJson = parse(diffText);
-  const diffHtml = html(diffJson, { inputFormat: 'diff', showFiles: false, matching: 'lines', outputFormat: 'side-by-side' });
+  var diffText = createTwoFilesPatch("metadata1", "metadata2", JSON.stringify(metadata1, null, 2), JSON.stringify(metadata2, null, 2));
+  const diffHtml = html(diffText, { inputFormat: 'diff', showFiles: true, matching: 'words', outputFormat: 'side-by-side' });
   const sanitizedHtml = DOMPurify.sanitize(diffHtml);
-
   return (
     <div>
       <h1>Comparing Nodes {id1} and {id2}</h1>
