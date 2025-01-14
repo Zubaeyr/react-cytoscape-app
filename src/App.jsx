@@ -16,10 +16,11 @@ function App() {
   const [elements, setElements] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const pipelineId = "pipeline-1";
   
   useEffect(() => {
     const getElements = async () => {
-      const elements = await fetchPipelineRunsGraph();
+      const elements = await fetchPipelineRunsGraph(pipelineId);
       setElements(elements);
       setLoading(false);
     };

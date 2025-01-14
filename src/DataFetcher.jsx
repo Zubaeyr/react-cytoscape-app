@@ -30,7 +30,7 @@
     }
   };
 
-  export const fetchPipelineRunsGraph = async () => {
+  export const fetchPipelineRunsGraph = async (pipelineId) => {  
     return [
       { data: { id: 'a1b2', label: 'Run 1' } },
       { data: { id: 'c3d4', label: 'Run 2' } },
