@@ -106,9 +106,30 @@ function App() {
   };
 
   return (
-      <Routes>
-        <Route path="/" element={
-          <div style={{ width: '100vw', height: '100vh' }}>
+    <Routes>
+      <Route path="/" element={
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+          <div style={{ flex: '0 1 auto', padding: '10px', textAlign: 'center' }}>
+            <button
+              onClick={handleCompareClick}
+              style={{
+                padding: '10px 20px',
+                backgroundColor: '#007bff',
+                color: '#fff',
+                border: 'none',
+                borderRadius: '5px',
+                cursor: 'pointer',
+                fontSize: '16px',
+                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                transition: 'background-color 0.3s ease',
+              }}
+              onMouseOver={(e) => e.target.style.backgroundColor = '#0056b3'}
+              onMouseOut={(e) => e.target.style.backgroundColor = '#007bff'}
+            >
+              Compare Runs
+            </button>
+          </div>
+          <div style={{ flex: '1 1 auto', position: 'relative' }}>
             <CytoscapeComponent
               elements={elements}
               style={{ width: '100%', height: '100%' }}
@@ -117,16 +138,13 @@ function App() {
               cy={(cy) => {
                 cy.on('select', 'node', handleNodeClick);
                 cy.on('unselect', 'node', handleNodeUnselect);
-
               }}
             />
-            <button onClick={handleCompareClick} style={{ position: 'absolute', top: '10px', right: '10px' }}>
-              Compare
-            </button>            
           </div>
-        } />
-        <Route path="/diff/:id1/:id2" element={<PipelineRunDiff />} />
-      </Routes>
+        </div>
+      } />
+      <Route path="/diff/:id1/:id2" element={<PipelineRunDiff />} />
+    </Routes>
   );
 }
 
