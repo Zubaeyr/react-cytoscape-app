@@ -35,10 +35,14 @@ function PipelineRunDiff() {
   const diffHtml = html(diffText, { inputFormat: 'diff', showFiles: true, matching: 'words', outputFormat: 'side-by-side' });
   const sanitizedHtml = DOMPurify.sanitize(diffHtml);
   return (
-    <div>
-      <h1>Comparing Nodes {id1} and {id2}</h1>
-        <div style={{ border: '1px solid #ddd', borderRadius: '5px', overflow: 'auto', maxHeight: '80vh' }}>
-        <div dangerouslySetInnerHTML={{ __html: sanitizedHtml }} />
+    <div style={{ fontFamily: 'Arial, sans-serif', color: '#333' }}>
+      <div style={{ flex: '0 1 auto', padding: '10px', textAlign: 'left', backgroundColor: '#e0edf9', border: '1px solid #aad1f7', borderRadius: '10px', margin: '10px' }}>
+        <h4 style={{ margin: '0', fontSize: '1.5em' }}>Comparing Pipeline Runs '{id1}' and '{id2}'</h4>
+      </div>
+      <div style={{ marginTop: '20px', margin: '10px' }}>
+        <div style={{ border: '1px solid #ddd', borderRadius: '5px', overflow: 'auto', maxHeight: '80vh', padding: '10px', backgroundColor: '#f9f9f9' }}>
+          <div dangerouslySetInnerHTML={{ __html: sanitizedHtml }} />
+        </div>
       </div>
     </div>
   );

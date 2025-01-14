@@ -81,11 +81,6 @@ function App() {
         const newSelectedNodes = [...prevSelectedNodes, nodeId];
         return newSelectedNodes;
       }
-
-      // if (newSelectedNodes.length === 2) {
-      //   navigate(`/diff/${newSelectedNodes[0]}/${newSelectedNodes[1]}`);
-      // }
-      return newSelectedNodes;
     });
   };
 
@@ -101,7 +96,7 @@ function App() {
       navigate(`/diff/${selectedNodes[0]}/${selectedNodes[1]}`);
       setSelectedNodes([]);
     } else {
-      alert('Please select exactly two nodes to compare..' + selectedNodes.length);
+      alert('Please select exactly two runs to compare..' + selectedNodes.length);
     }
   };
 
@@ -109,7 +104,7 @@ function App() {
     <Routes>
       <Route path="/" element={
         <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
-          <div style={{ flex: '0 1 auto', padding: '10px', textAlign: 'center' }}>
+          <div style={{ flex: '0 1 auto', padding: '10px', textAlign: 'center', backgroundColor: ' #e0edf9', border: '1px solid #aad1f7', borderRadius: '10px', margin: '0 10px' }}>
             <button
               onClick={handleCompareClick}
               style={{
@@ -129,7 +124,7 @@ function App() {
               Compare Runs
             </button>
           </div>
-          <div style={{ flex: '1 1 auto', position: 'relative' }}>
+          <div style={{ flex: '1 1 auto', position: 'relative', border: '1px solid #aad1f7', borderRadius: '1px', margin: '10px 10px' }}>
             <CytoscapeComponent
               elements={elements}
               style={{ width: '100%', height: '100%' }}
