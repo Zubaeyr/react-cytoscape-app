@@ -1,0 +1,36 @@
+{
+  "name": "react-cytoscape-app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "cytoscape": "^3.31.0",
+    "cytoscape-dagre": "^2.5.0",
+    "diff2html": "^3.4.51",
+    "dompurify": "^3.2.3",
+    "highlight.js": "^11.11.1",
+    "react": "^18.3.1",
+    "react-cytoscapejs": "^2.0.0",
+    "react-diff-viewer": "^3.1.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.1.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react-swc": "^3.5.0",
+    "eslint": "^9.17.0",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.16",
+    "globals": "^15.14.0",
+    "vite": "^6.0.5"
+  }
+}
