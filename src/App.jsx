@@ -12,21 +12,21 @@ function App() {
   const navigate = useNavigate();
 
   const elements = [
-    { data: { id: 'one', label: 'Node 1' } },
-    { data: { id: 'two', label: 'Node 2' } },
-    { data: { id: 'three', label: 'Node 3' } },
-    { data: { id: 'four', label: 'Node 4' } },
-    { data: { id: 'five', label: 'Node 5' } },
-    { data: { id: 'six', label: 'Node 6' } },
-    { data: { id: 'seven', label: 'Node 7' } },
-    { data: { id: 'eight', label: 'Node 8' } },
-    { data: { source: 'one', target: 'two', label: 'Edge from Node1 to Node2' } },
-    { data: { source: 'one', target: 'three', label: 'Edge from Node1 to Node3' } },
-    { data: { source: 'two', target: 'four', label: 'Edge from Node2 to Node4' } },
-    { data: { source: 'two', target: 'five', label: 'Edge from Node2 to Node5' } },
-    { data: { source: 'three', target: 'six', label: 'Edge from Node3 to Node6' } },
-    { data: { source: 'three', target: 'seven', label: 'Edge from Node3 to Node7' } },
-    { data: { source: 'four', target: 'eight', label: 'Edge from Node4 to Node8' } },
+    { data: { id: 'a1b2', label: 'Run 1' } },
+    { data: { id: 'c3d4', label: 'Run 2' } },
+    { data: { id: 'e5f6', label: 'Run 3' } },
+    { data: { id: 'g7h8', label: 'Run 4' } },
+    { data: { id: 'i9j0', label: 'Run 5' } },
+    { data: { id: 'k1l2', label: 'Run 6' } },
+    { data: { id: 'm3n4', label: 'Run 7' } },
+    { data: { id: 'o5p6', label: 'Run 8' } },
+    { data: { source: 'a1b2', target: 'c3d4', label: 'Edge from Run 1 to Run 2' } },
+    { data: { source: 'a1b2', target: 'e5f6', label: 'Edge from Run 1 to Run 3' } },
+    { data: { source: 'c3d4', target: 'g7h8', label: 'Edge from Run 2 to Run 4' } },
+    { data: { source: 'c3d4', target: 'i9j0', label: 'Edge from Run 2 to Run 5' } },
+    { data: { source: 'e5f6', target: 'k1l2', label: 'Edge from Run 3 to Run 6' } },
+    { data: { source: 'e5f6', target: 'm3n4', label: 'Edge from Run 3 to Run 7' } },
+    { data: { source: 'g7h8', target: 'o5p6', label: 'Edge from Run 4 to Run 8' } },
   ];
 
   const layout = {
