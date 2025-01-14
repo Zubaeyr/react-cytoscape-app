@@ -1,35 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import CytoscapeComponent from 'react-cytoscapejs';
 import cytoscape from 'cytoscape';
 import dagre from 'cytoscape-dagre';
 import PipelineRunDiff from './Diff';
 import Modal from './Modal';
+import { fetchPipelineRunsGraph } from './DataFetcher';
 
 cytoscape.use(dagre);
 
 function App() {
   const [selectedNodes, setSelectedNodes] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [elements, setElements] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  
+  useEffect(() => {
+    const getElements = async () => {
+      const elements = await fetchPipelineRunsGraph();
+      setElements(elements);
+      setLoading(false);
+    };
 
-  const elements = [
-    { data: { id: 'a1b2', label: 'Run 1' } },
-    { data: { id: 'c3d4', label: 'Run 2' } },
-    { data: { id: 'e5f6', label: 'Run 3' } },
-    { data: { id: 'g7h8', label: 'Run 4' } },
-    { data: { id: 'i9j0', label: 'Run 5' } },
-    { data: { id: 'k1l2', label: 'Run 6' } },
-    { data: { id: 'm3n4', label: 'Run 7' } },
-    { data: { id: 'o5p6', label: 'Run 8' } },
-    { data: { source: 'a1b2', target: 'c3d4', label: 'Edge from Run 1 to Run 2' } },
-    { data: { source: 'a1b2', target: 'e5f6', label: 'Edge from Run 1 to Run 3' } },
-    { data: { source: 'c3d4', target: 'g7h8', label: 'Edge from Run 2 to Run 4' } },
-    { data: { source: 'c3d4', target: 'i9j0', label: 'Edge from Run 2 to Run 5' } },
-    { data: { source: 'e5f6', target: 'k1l2', label: 'Edge from Run 3 to Run 6' } },
-    { data: { source: 'e5f6', target: 'm3n4', label: 'Edge from Run 3 to Run 7' } },
-    { data: { source: 'g7h8', target: 'o5p6', label: 'Edge from Run 4 to Run 8' } },
-  ];
+    getElements();
+  }, []);
+  
 
   const layout = {
     name: 'dagre',
@@ -128,7 +124,9 @@ function App() {
             </button>
           </div>
           <div style={{ flex: '1 1 auto', position: 'relative', border: '1px solid #aad1f7', borderRadius: '1px', margin: '10px 10px' }}>
-            <CytoscapeComponent
+            {loading ? (
+                  <div>Loading...</div>
+            ) : (<CytoscapeComponent
               elements={elements}
               style={{ width: '100%', height: '100%' }}
               layout={layout}
@@ -138,6 +136,7 @@ function App() {
                 cy.on('unselect', 'node', handleNodeUnselect);
               }}
             />
+            )}
           </div>
         </div>
       } />
