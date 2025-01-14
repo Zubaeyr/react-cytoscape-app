@@ -4,11 +4,13 @@ import CytoscapeComponent from 'react-cytoscapejs';
 import cytoscape from 'cytoscape';
 import dagre from 'cytoscape-dagre';
 import PipelineRunDiff from './Diff';
+import Modal from './Modal';
 
 cytoscape.use(dagre);
 
 function App() {
   const [selectedNodes, setSelectedNodes] = useState([]);
+  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
   const elements = [
@@ -96,11 +98,12 @@ function App() {
       navigate(`/diff/${selectedNodes[0]}/${selectedNodes[1]}`);
       setSelectedNodes([]);
     } else {
-      alert('Please select exactly two runs to compare..' + selectedNodes.length);
+      setShowModal(true);
     }
   };
 
   return (
+    <>
     <Routes>
       <Route path="/" element={
         <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
@@ -140,6 +143,14 @@ function App() {
       } />
       <Route path="/diff/:id1/:id2" element={<PipelineRunDiff />} />
     </Routes>
+    <Modal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        title="Selection Error"
+        >
+        <p>Please select exactly two runs to compare. You have selected {selectedNodes.length}.</p>
+      </Modal>
+  </>    
   );
 }
 
