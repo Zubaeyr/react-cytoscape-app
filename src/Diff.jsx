@@ -4,6 +4,7 @@ import { html } from 'diff2html';
 import 'diff2html/bundles/css/diff2html.min.css';
 import DOMPurify from 'dompurify';
 import { createTwoFilesPatch } from 'diff';
+import { fetchDataForDiff } from './DataFetcher';
 
 function PipelineRunDiff() {
   const { id1, id2 } = useParams();
@@ -14,43 +15,12 @@ function PipelineRunDiff() {
   const dataTypes = ['metadata', 'logs', 'config', 'results']; // List of data types
 
   useEffect(() => {
-    const fetchMetadata = async (id) => {
-      return { id, label: `Node ${id}`, data: `Some metadata for node ${id}` };
-    };
-
-    const fetchLogs = async (id) => {
-      return { id, label: `Node ${id}`, logs: `Some logs for node ${id}` };
-    };
-
-    const fetchConfig = async (id) => {
-      return { id, label: `Node ${id}`, config: `Some config for node ${id}` };
-    };
-
-    const fetchResults = async (id) => {
-      return { id, label: `Node ${id}`, results: `Some results for node ${id}` };
-    };
-
-    const fetchData = async (id, type) => {
-      switch (type) {
-        case 'metadata':
-          return await fetchMetadata(id);
-        case 'logs':
-          return await fetchLogs(id);
-        case 'config':
-          return await fetchConfig(id);
-        case 'results':
-          return await fetchResults(id);
-        default:
-          throw new Error('Unknown data type');
-      }
-    };
-
     const fetchAllData = async () => {
       const data1 = {};
       const data2 = {};
       for (const type of dataTypes) {
-        data1[type] = await fetchData(id1, type);
-        data2[type] = await fetchData(id2, type);
+        data1[type] = await fetchDataForDiff(id1, type);
+        data2[type] = await fetchDataForDiff(id2, type);
       }
       setData1(data1);
       setData2(data2);
