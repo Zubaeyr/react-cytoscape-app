@@ -72,7 +72,7 @@ function PipelineRunDiff() {
         
       {dataTypes.map((type) => {
         const diffText = createTwoFilesPatch(type, type, JSON.stringify(data1[type], null, 2), JSON.stringify(data2[type], null, 2));
-        const diffHtml = html(diffText, { inputFormat: 'diff', showFiles: true, matching: 'words', outputFormat: 'side-by-side' });
+        const diffHtml = html(diffText, { inputFormat: 'diff', showFiles: true, drawFileList: false, matching: 'words', outputFormat: 'side-by-side' });
         const sanitizedHtml = DOMPurify.sanitize(diffHtml);
 
         return (
