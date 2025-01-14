@@ -15,7 +15,6 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   const [elements, setElements] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [longPress, setLongPress] = useState(false);
   const navigate = useNavigate();
   const pipelineId = "pipeline-1";
   
@@ -58,65 +57,46 @@ function App() {
     }
   };
 
-  const handleTouchStart = () => {
-    setLongPress(true);
-  };
-
-  const handleTouchEnd = (event) => {
-    if (longPress) {
-      handleNodeClick(event);
-    }
-    setLongPress(false);
-  };
-
   return (
-    <div
-    onTouchStart={handleTouchStart}
-    onTouchEnd={handleTouchEnd}
-    >
-    {
-        <>
-        <Routes>
-          <Route path="/" element={
-            <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
-              <div style={{ flex: '0 1 auto', padding: '10px', textAlign: 'center', backgroundColor: ' #e0edf9', border: '1px solid #aad1f7', borderRadius: '10px', margin: '0 10px' }}>
-                <button
-                  onClick={handleCompareClick}
-                  style={compareButtonStyle}
-                  onMouseOver={(e) => e.target.style.backgroundColor = '#0056b3'}
-                  onMouseOut={(e) => e.target.style.backgroundColor = '#007bff'}
-                >
-                  Compare Runs
-                </button>
-              </div>
-              <div style={{ flex: '1 1 auto', position: 'relative', border: '1px solid #aad1f7', borderRadius: '1px', margin: '10px 10px' }}>
-                {loading ? (
-                      <div>Loading...</div>
-                ) : (<CytoscapeComponent
-                  elements={elements}
-                  style={{ width: '100%', height: '100%' }}
-                  layout={cytoscapeLayout}
-                  stylesheet={cytoscapeStyle}
-                  cy={(cy) => {
-                    cy.on('select', 'node', handleNodeClick);
-                    cy.on('unselect', 'node', handleNodeUnselect);
-                  }}
-                />
-                )}
-              </div>
-            </div>
-          } />
-          <Route path="/diff/:id1/:id2" element={<PipelineRunDiff />} />
-        </Routes>
-        <Modal show={showModal}
-            onClose={() => setShowModal(false)}
-            title="Selection Error" >
-            <p>Please select exactly two runs to compare. You have selected {selectedNodes.length}.</p>
-          </Modal>
-        </>    
-      }
-    </div>
-
+    <>
+    <Routes>
+      <Route path="/" element={
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+          <div style={{ flex: '0 1 auto', padding: '10px', textAlign: 'center', backgroundColor: ' #e0edf9', border: '1px solid #aad1f7', borderRadius: '10px', margin: '0 10px' }}>
+            <button
+              onClick={handleCompareClick}
+              style={compareButtonStyle}
+              onMouseOver={(e) => e.target.style.backgroundColor = '#0056b3'}
+              onMouseOut={(e) => e.target.style.backgroundColor = '#007bff'}
+            >
+              Compare Runs
+            </button>
+          </div>
+          <div style={{ flex: '1 1 auto', position: 'relative', border: '1px solid #aad1f7', borderRadius: '1px', margin: '10px 10px' }}>
+            {loading ? (
+                  <div>Loading...</div>
+            ) : (<CytoscapeComponent
+              elements={elements}
+              style={{ width: '100%', height: '100%' }}
+              layout={cytoscapeLayout}
+              stylesheet={cytoscapeStyle}
+              cy={(cy) => {
+                cy.on('select', 'node', handleNodeClick);
+                cy.on('unselect', 'node', handleNodeUnselect);
+              }}
+            />
+            )}
+          </div>
+        </div>
+      } />
+      <Route path="/diff/:id1/:id2" element={<PipelineRunDiff />} />
+    </Routes>
+    <Modal show={showModal}
+        onClose={() => setShowModal(false)}
+        title="Selection Error" >
+        <p>Please select exactly two runs to compare. You have selected {selectedNodes.length}.</p>
+      </Modal>
+  </>    
   );
 }
 
